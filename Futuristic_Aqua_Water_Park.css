@@ -1,0 +1,302 @@
+/* ==UserStyle==
+@name           Futuristic Aqua Water Park
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A Futuristic Aqua Water Park Theme for Youtube
+@author         Solar Song
+==/UserStyle== */
+
+
+
+
+@-moz-document domain("youtube.com") {
+
+  /* ==========================================================================
+     1. COLOR PALETTE & GLOBAL VARIABLES
+     ========================================================================== */
+  :root {
+    /* Primary Aqua Palette */
+    --aqua-core: #00f2fe;
+    --aqua-deep: #0099ff;
+    --aqua-glow: rgba(0, 242, 254, 0.4);
+    --aqua-accent: #38ef7d;
+    
+    /* Aquatic Backgrounds */
+    --bg-dark: #030d18;
+    --bg-surface: #07192c;
+    --bg-card: rgba(11, 31, 53, 0.75);
+    --bg-glass: rgba(0, 242, 254, 0.05);
+    
+    /* Text & Highlights */
+    --text-primary: #e0f7fc;
+    --text-secondary: #70a1bf;
+    --border-glow: rgba(0, 242, 254, 0.25);
+  }
+
+  /* Force Dark Theme Base */
+  html[dark], html, body, ytd-app {
+    background-color: var(--bg-dark) !important;
+    color: var(--text-primary) !important;
+  }
+
+  /* ==========================================================================
+     2. BACKGROUND WATER WAVE ANIMATION
+     ========================================================================== */
+  ytd-app::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(circle at 50% 20%, rgba(0, 242, 254, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(0, 153, 255, 0.08) 0%, transparent 50%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(0, 242, 254, 0.02) 0px,
+        rgba(0, 242, 254, 0.02) 20px,
+        transparent 20px,
+        transparent 40px
+      );
+    pointer-events: none;
+    z-index: 0;
+    animation: poolRipple 20s linear infinite;
+  }
+
+  @keyframes poolRipple {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-2%, -2%) rotate(1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+  /* ==========================================================================
+     3. HEADER / NAVBAR (FUTURISTIC GLASS)
+     ========================================================================== */
+  #masthead-container.ytd-app {
+    background: rgba(3, 13, 24, 0.85) !important;
+    backdrop-filter: blur(12px) saturate(180%);
+    border-bottom: 1px solid var(--border-glow);
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.15);
+  }
+
+  /* YouTube Logo Neon Glow */
+  #logo-icon {
+    color: var(--aqua-core) !important;
+    filter: drop-shadow(0 0 8px var(--aqua-glow));
+  }
+
+  /* Search Bar */
+  ytd-searchbox[has-focus] #container.ytd-searchbox,
+  #container.ytd-searchbox {
+    background: rgba(7, 25, 44, 0.8) !important;
+    border: 1px solid var(--border-glow) !important;
+    border-radius: 20px 0 0 20px !important;
+    box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.1);
+  }
+
+  #search-icon-legacy.ytd-searchbox {
+    background: linear-gradient(135deg, var(--bg-surface), var(--bg-card)) !important;
+    border: 1px solid var(--border-glow) !important;
+    border-left: none !important;
+    border-radius: 0 20px 20px 0 !important;
+  }
+
+  #search-icon-legacy.ytd-searchbox:hover {
+    background: var(--aqua-deep) !important;
+    box-shadow: 0 0 12px var(--aqua-glow);
+  }
+
+  /* Search Text */
+  input#search {
+    color: var(--text-primary) !important;
+  }
+
+  /* ==========================================================================
+     4. CARDS & VIDEO THUMBNAILS
+     ========================================================================== */
+  ytd-rich-grid-media, 
+  ytd-compact-video-renderer,
+  ytd-watch-flexy {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Thumbnail Hover FX */
+  ytd-thumbnail {
+    border-radius: 12px !important;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    border: 1px solid transparent;
+  }
+
+  ytd-thumbnail:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--aqua-core) !important;
+    box-shadow: 0 8px 25px rgba(0, 242, 254, 0.35);
+  }
+
+  /* Video Titles & Details */
+  #video-title {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+  }
+
+  #channel-name .text, #metadata-line span {
+    color: var(--text-secondary) !important;
+  }
+
+  /* ==========================================================================
+     5. BUTTONS, CHIPS & ACCENTS
+     ========================================================================== */
+  /* Filter Chips (Categories) */
+  yt-chip-cloud-chip-renderer[selected] {
+    background: linear-gradient(135deg, var(--aqua-core), var(--aqua-deep)) !important;
+    color: #000 !important;
+    font-weight: bold;
+    box-shadow: 0 0 15px var(--aqua-glow);
+  }
+
+  yt-chip-cloud-chip-renderer {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-glow) !important;
+    color: var(--text-primary) !important;
+    border-radius: 12px !important;
+  }
+
+  /* Subscribe Button */
+  ytd-subscribe-button-renderer button {
+    background: linear-gradient(135deg, #00f2fe, #0099ff) !important;
+    color: #030d18 !important;
+    font-weight: 700 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    transition: all 0.2s ease !important;
+  }
+
+  ytd-subscribe-button-renderer button:hover {
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.8) !important;
+    transform: scale(1.05);
+  }
+
+  /* ==========================================================================
+     6. PLAYER CONTROLS & PROGRESS BAR
+     ========================================================================== */
+  /* Scrubber Bar Glow */
+  .ytp-play-progress.ytp-swatch-background-color {
+    background: linear-gradient(90deg, var(--aqua-deep), var(--aqua-core)) !important;
+    box-shadow: 0 0 10px var(--aqua-core);
+  }
+
+  .ytp-scrubber-button.ytp-swatch-background-color {
+    background: var(--text-primary) !important;
+    box-shadow: 0 0 12px var(--aqua-core) !important;
+  }
+
+  /* ==========================================================================
+     7. SIDEBAR & NAVIGATION DRAWER
+     ========================================================================== */
+  ytd-guide-renderer, ytd-mini-guide-renderer {
+    background: var(--bg-dark) !important;
+  }
+
+  ytd-guide-entry-renderer:hover {
+    background: var(--bg-glass) !important;
+    border-left: 3px solid var(--aqua-core);
+    box-shadow: inset 10px 0 15px -5px var(--aqua-glow);
+  }
+
+  /* Active Sidebar Item */
+  ytd-guide-entry-renderer[is-selected] {
+    background: linear-gradient(90deg, rgba(0, 242, 254, 0.15), transparent) !important;
+    border-left: 3px solid var(--aqua-core);
+  }
+
+  ytd-guide-entry-renderer[is-selected] .title {
+    color: var(--aqua-core) !important;
+    font-weight: bold;
+  }
+
+  /* Custom Water Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px !important;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-dark) !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-glow) !important;
+    border-radius: 4px !important;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--aqua-deep) !important;
+    box-shadow: 0 0 10px var(--aqua-core) !important;
+  }
+
+
+
+/* =========================================================
+   HIDE "Show more" BUTTON AND ALWAYS EXPAND THE SHELF
+   ========================================================= */
+
+/* 1. Completely hide the button and its container */
+ytd-rich-shelf-renderer .button-container,
+ytd-rich-shelf-renderer .expand-collapse-button,
+ytd-rich-shelf-renderer ytd-button-renderer.expand-collapse-button {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* 2. Force the shelf contents to always be fully expanded */
+ytd-rich-shelf-renderer #contents-container {
+    max-height: none !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+ytd-rich-shelf-renderer #contents {
+    max-height: none !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* 3. Remove any height restrictions or hidden overlays on the shelf itself */
+ytd-rich-shelf-renderer {
+    max-height: none !important;
+    height: auto !important;
+}
+
+ytd-rich-shelf-renderer #dismissible {
+    max-height: none !important;
+    height: auto !important;
+}
+
+/* 4. Remove any negative margins that might clip content */
+ytd-rich-shelf-renderer #contents-container,
+ytd-rich-shelf-renderer #contents {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
